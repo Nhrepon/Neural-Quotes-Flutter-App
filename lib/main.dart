@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -42,6 +43,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AlertDialog alert;
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -50,9 +52,32 @@ class Home extends StatelessWidget {
         //leading: Icon(Icons.menu),
         actions: [
           IconButton(
-            icon: Icon(Icons.verified_user_sharp),
-            tooltip: "Appbar actions",
-            onPressed: () {},
+            icon: IconButton(onPressed: (){
+
+
+
+            showDialog(
+              barrierColor: Colors.black26,
+                barrierDismissible: true,
+                context: context,
+                builder: (context){
+                  return AlertDialog(
+                    title: Text("Alert"),
+                    content: Text("Messages"),
+                    actions: [
+                      TextButton(onPressed: (){}, child: Text("No")),
+                      TextButton(onPressed: (){}, child: Text("Yes"))
+                    ],
+                  );
+                }
+            );
+
+
+
+            },
+                icon: const Icon(Icons.supervised_user_circle)),
+                tooltip: "Appbar actions",
+                onPressed: () {},
           )
         ],
       ),
@@ -70,12 +95,38 @@ class Home extends StatelessWidget {
 
       body: Scrollbar(
         child: ListView.builder(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
             itemCount: dataList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(dataList[index]),
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                shadowColor: Colors.black,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(dataList[index], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                              Text(dataList[index], style: TextStyle(fontSize: 14,),),
+                            ],
+                          ),),
+                          Image.asset('assets/images/img.jpg', width: 80,),
+
+
+
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               );
             }),
       ),
@@ -85,6 +136,9 @@ class Home extends StatelessWidget {
 
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.green,
+        selectedIndex: 1,
+        shadowColor: Colors.red,
+        onDestinationSelected: (value) => value,
         destinations: [
           NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           NavigationDestination(
