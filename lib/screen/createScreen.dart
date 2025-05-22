@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neural_quotes/style/style.dart';
+import 'package:neural_quotes/utility/utility.dart';
 
 class Createscreen extends StatefulWidget {
   static const String name = "create-product";
@@ -14,6 +15,24 @@ class _CreatescreenState extends State<Createscreen> {
     setState(() {
       formValues.update(key, (value)=>val);
     });
+  }
+
+  onSubmit(){
+    if(formValues['ProductName']!.length == 0){
+      ErrorToast("Product name required!");
+    }else if(formValues['img']!.length == 0){
+      ErrorToast("Product image required!");
+    }else if(formValues['ProductCode']!.length == 0){
+      ErrorToast("Product ProductCode required!");
+    }else if(formValues['Qty']!.length == 0){
+      ErrorToast("Product Quantity required!");
+    }else if(formValues['TotalPrice']!.length == 0){
+      ErrorToast("Product TotalPrice required!");
+    }else if(formValues['UnitePrice']!.length == 0){
+      ErrorToast("Product UnitePrice required!");
+    }else{
+
+    }
   }
 
   @override
@@ -51,7 +70,7 @@ class _CreatescreenState extends State<Createscreen> {
                   TextFormField(onChanged: (value){inputOnChange("TotalPrice", value);},decoration: AppInputDecoration("Total price"),),
                   Container(child: ElevatedButton(
                       style: AppButtonStyle(),
-                      onPressed: (){},
+                      onPressed: (){onSubmit();},
                       child: SuccessButtonChild("Submit")
                   ),)
                 ],

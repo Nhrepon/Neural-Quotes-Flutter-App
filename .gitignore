@@ -1,9 +1,9 @@
-android
-ios
-windows
-web
-linux
-macos
+android/
+ios/
+windows/
+web/
+linux/
+macos/
 
 # Miscellaneous
 *.class
